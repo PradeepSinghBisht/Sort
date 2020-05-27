@@ -28,6 +28,7 @@ Testcase 2: Characters in both the strings are not same, so they are not anagram
 
 package com.company;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Anagram {
@@ -37,18 +38,48 @@ public class Anagram {
         for (int z = 0; z < t; z++){
             String str1 = scanner.next();
             String str2 = scanner.next();
-            frequency(str1,str2);
+            if (str1.length() != str2.length()){
+                System.out.println("NO");
+            }
+            else {
+                System.out.println(match(str1,str2));
+            }
         }
     }
-    public static void frequency(String str1, String str2){
-        int frequency1 = 0;
-        int frequency2 = 0;
-        for (int i = 0; i < str1.length(); i++){
-            frequency1 += (int) str1.charAt(i);
+    public static String match(String str1, String str2){
+        char[] array1 = str1.toCharArray();
+        char[] array2 = str2.toCharArray();
+        Arrays.sort(array1);
+        Arrays.sort(array2);
+        for (int i = 0; i < array1.length; i++){
+            if (array1[i] == array2[i]){
+                continue;
+            }
+            else {
+                return "NO";
+            }
         }
-        for (int i = 0; i < str2.length(); i++){
-            frequency2 += (int) str2.charAt(i);
-        }
-        System.out.println((frequency1 == frequency2)?"YES":"NO");
+        return "YES";
     }
 }
+/*
+    public static String match(String str1, String str2){
+        char[] array1 = new char[26];
+        char[] array2 = new char[26];
+        for (int  i = 0; i < str1.length(); i++){
+            array1[str1.charAt(i)-'a'] += 1;
+        }
+        for (int j = 0; j < str2.length(); j++){
+            array2[str2.charAt(j)-'a'] += 1;
+        }
+        for (int k = 0; k < 26; k++){
+            if (array1[k] == array2[k]){
+                continue;
+            }
+            else {
+                return "NO";
+            }
+        }
+        return "YES";
+    }
+*/
